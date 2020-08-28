@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/Feather';
 
 import Button from '../../components/Button';
 import Input from '../../components/Input';
+import { useNavigation } from '@react-navigation/native';
 
 import {
   Container,
@@ -16,6 +17,7 @@ import {
 } from './styles';
 
 const SignIn: React.FC = () => {
+  const navigation = useNavigation();
   return (
     <>
       <KeyboardAvoidingView
@@ -24,7 +26,11 @@ const SignIn: React.FC = () => {
         enabled
       >
         <ScrollView
-          contentContainerStyle={{ flex: 1 }}
+          contentContainerStyle={
+            {
+              flex: 1,
+            }
+          }
           keyboardShouldPersistTaps="handled"
         >
           <Container>
@@ -42,7 +48,7 @@ const SignIn: React.FC = () => {
             </Button>
 
             <ForgotPassword>
-              <ForgotPasswordText onPress={() => { console.log('') }}>
+              <ForgotPasswordText onPress={() => { }}>
                 Esqueci minha senha
               </ForgotPasswordText>
             </ForgotPassword>
@@ -51,7 +57,7 @@ const SignIn: React.FC = () => {
         </ScrollView>
       </KeyboardAvoidingView>
 
-      <CreateAccountButton onPress={() => { }}>
+      <CreateAccountButton onPress={() => { navigation.navigate('SignUp') }}>
         <Icon
           name="log-in"
           size={20}
