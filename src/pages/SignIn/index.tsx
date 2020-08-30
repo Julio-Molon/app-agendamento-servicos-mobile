@@ -19,6 +19,8 @@ import { FormHandles } from "@unform/core";
 import getValidationErros from '../../utils/getValidationErrors';
 import * as Yup from 'yup';
 
+import { useAuth } from '../../hooks/auth';
+
 import {
   Container,
   Title,
@@ -39,6 +41,8 @@ const SignIn: React.FC = () => {
 
   const navigation = useNavigation();
 
+  const { signIn, user } = useAuth();
+
   const handleSingIn = useCallback(
     async (data: SignInFormData) => {
       try {
@@ -55,12 +59,11 @@ const SignIn: React.FC = () => {
           abortEarly: false,
         });
 
-        //await signIn({
-        //  email: data.email,
-        //  password: data.password,
-        //});
+        await signIn({
+          email: data.email,
+          password: data.password,
+        });
 
-        //history.push('/dashboard');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErros(err);
